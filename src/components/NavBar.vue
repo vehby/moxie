@@ -41,8 +41,11 @@
                 <span class="title font-weight-light">MOXIE </span>STUDIO
             </v-toolbar-title>
             <v-spacer />
-            <v-btn dark icon>
-                <v-icon left>notifications_none</v-icon>
+            <v-btn dark icon class="pr-4">
+                <v-badge color="white red--text">
+                <template v-slot:badge>0</template>
+                <v-icon>notifications_none</v-icon>
+                </v-badge>
             </v-btn>
             <v-menu>
                 <template v-slot:activator="{ on, attrs }">
