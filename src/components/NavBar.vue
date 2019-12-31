@@ -2,7 +2,7 @@
     <v-app id="inspire">
         <v-navigation-drawer v-model="drawer" app clipped>
             <v-list dense>
-                <v-list-item v-for="item in items" :key="item.text" link>
+                <v-list-item v-for="item in items" :key="item.text" router :to="item.route" link>
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-action>
@@ -45,7 +45,7 @@
             <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" />
             <v-img src="../assets/moxie-logo.png" lazy-src="../assets/moxie-logo.png" aspect-ratio="1" max-width="24" max-height="24" class="mr-2"></v-img>
             <v-toolbar-title class="mr-12 align-center">
-                <span class="title font-weight-light">MOXIE </span>MANAGMENT
+                <span class="title font-weight-light">MOXIE </span>STUDIO
             </v-toolbar-title>
             <v-spacer />
             <v-btn dark icon>
@@ -84,12 +84,12 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: 'dashboard', text: 'Dashboadr' },
-        { icon: 'laptop_mac', text: 'Agent' },
-        { icon: 'queue_play_next', text: 'Script' },
-        { icon: 'playlist_add_check', text: 'Tasks' },
-        { icon: 'playlist_play', text: 'Trigger' },
-        { icon: 'supervisor_account', text: 'User Manager' },
+        { icon: 'dashboard', text: 'Dashboard', route:'/dashboard' },
+        { icon: 'laptop_mac', text: 'Agent', route:'/team'},
+        { icon: 'queue_play_next', text: 'Script', route:'/dashboard'},
+        { icon: 'playlist_add_check', text: 'Tasks', route:'/dashboard'},
+        { icon: 'playlist_play', text: 'Trigger', route:'/dashboard'},
+        { icon: 'supervisor_account', text: 'User Manager', route:'/dashboard'},
       ],
  
     }),
