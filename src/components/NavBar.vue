@@ -13,13 +13,6 @@
                     </v-list-item-content>
                 </v-list-item>
 
-                <v-list-item link>
-                    <v-list-item-action>
-                        <v-icon color="grey darken-1">mdi-settings</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-title class="grey--text text--darken-1">Settings</v-list-item-title>
-                </v-list-item>
-
 
                 <!-- If you need sub menu list you can use  -->
                 <!-- <v-list-group :value="false">
@@ -64,14 +57,24 @@
                     <v-list-item @click="method" link>
                         <v-list-item-title>Log Out</v-list-item-title>
                     </v-list-item>
+
+                    <router-link to="/settings">
                     <v-list-item link>
                         <v-list-item-title>
                             Settings
                         </v-list-item-title>
                     </v-list-item>
+                    </router-link>
+                    
                 </v-list>
             </v-menu>
         </v-app-bar>
+
+        <v-content class="mx-4 my-4">
+        <router-view></router-view>
+        </v-content>
+
+
     </v-app>
 </template>
 
@@ -85,11 +88,12 @@
       drawer: null,
       items: [
         { icon: 'dashboard', text: 'Dashboard', route:'/dashboard' },
-        { icon: 'laptop_mac', text: 'Agent', route:'/team'},
-        { icon: 'queue_play_next', text: 'Script', route:'/dashboard'},
-        { icon: 'playlist_add_check', text: 'Tasks', route:'/dashboard'},
-        { icon: 'playlist_play', text: 'Trigger', route:'/dashboard'},
-        { icon: 'supervisor_account', text: 'User Manager', route:'/dashboard'},
+        { icon: 'laptop_mac', text: 'Agent', route:'/agent'},
+        { icon: 'queue_play_next', text: 'Script', route:'/scripts'},
+        { icon: 'playlist_add_check', text: 'Tasks', route:'/tasks'},
+        { icon: 'playlist_play', text: 'Trigger', route:'/trigger'},
+        { icon: 'supervisor_account', text: 'User Manager', route:'/usermanager'},
+        { icon: 'mdi-settings', text: 'Settings', route:'/settings'},
       ],
  
     }),
