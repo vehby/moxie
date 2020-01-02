@@ -1,4 +1,4 @@
-# moxie
+# Moxie Studio
 
 ## Project setup
 ```
