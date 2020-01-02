@@ -5,6 +5,7 @@ import Agent from './views/Agent.vue'
 import Scripts from './views/Scripts.vue'
 import Tasks from './views/Tasks.vue'
 import Trigger from './views/Trigger.vue'
+import Logs from './views/Logs.vue'
 import UserManager from './views/UserManager.vue'
 import Settings from './views/Settings'
 
@@ -14,6 +15,11 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '',
+      name: 'home',
+      component: Dashboard
+    },
     {
       path: '/dashboard',
       name: 'dashboard',
@@ -38,6 +44,11 @@ export default new Router({
       path : '/trigger',
       name : 'trigger',
       component : Trigger
+    },
+    {
+      path : '/logs',
+      name : 'logs',
+      component : Logs
     },
     {
       path : '/usermanager',
