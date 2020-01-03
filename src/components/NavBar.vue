@@ -14,9 +14,6 @@
                 </v-list-item>
                 <v-divider></v-divider>
 
-                
-
-
                 <!-- If you need sub menu list you can use  -->
                 <!-- <v-list-group :value="false">
                     <template #prependIcon>
@@ -100,7 +97,7 @@
       items: [
         { icon: 'dashboard', text: 'Dashboard', route:'/dashboard' },
         { icon: 'laptop_mac', text: 'Agent', route:'/agent'},
-        { icon: 'queue_play_next', text: 'Script', route:'/scripts'},
+        { icon: 'queue_play_next', text: 'Scripts', route:'/scripts'},
         { icon: 'playlist_add_check', text: 'Tasks', route:'/tasks'},
         { icon: 'playlist_play', text: 'Trigger', route:'/trigger'},
         { icon: 'reorder', text: 'Logs', route:'/logs'},
