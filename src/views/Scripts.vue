@@ -10,7 +10,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn outlined color="red" v-on="on">
+            <v-btn color="primary" v-on="on">
                 <v-icon left>add</v-icon>
                 New Script</v-btn>
           </template>
@@ -51,8 +51,10 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save" >Save</v-btn>
+              <v-btn depressed color="primary" @click="save">Save</v-btn>
+              <v-btn color="blue darken-1"  text @click="close">Cancel</v-btn>
+              
+            
             </v-card-actions>
              </v-form>
           </v-card>
