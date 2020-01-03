@@ -10,7 +10,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" v-on="on">
+            <v-btn color="primary" v-on="on" depressed>
                 <v-icon left>add</v-icon>
                 New Script</v-btn>
           </template>
