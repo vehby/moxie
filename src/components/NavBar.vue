@@ -95,7 +95,8 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: 'dashboard', text: 'Dashboard', route:'/dashboard' },
+        
+        
         { icon: 'laptop_mac', text: 'Agent', route:'/agent'},
         { icon: 'queue_play_next', text: 'Scripts', route:'/scripts'},
         { icon: 'playlist_add_check', text: 'Tasks', route:'/tasks'},

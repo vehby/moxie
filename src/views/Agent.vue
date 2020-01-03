@@ -61,20 +61,6 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      
-      <v-icon
-        small
-        class="mr-2"
-      >
-        play_arrow
-      </v-icon>
-      <v-icon
-        small
-        class="mr-2"
-      >
-        pause
-      </v-icon>
-
       <v-icon
         small
         class="mr-2"
@@ -136,7 +122,7 @@
         createdtime :"",
         platform: '',
         createduser: '',
-        status:'Deactive'
+        status:'Disconnected'
       },
       defaultItem: {
         name: '',
@@ -173,7 +159,7 @@
             createdtime: "2019.01.17",
             platform: "Windows",
             createduser: "Murat Çim",
-            status: "Active",
+            status: "Connected",
           },
           {
             name: 'MyPC',
@@ -181,7 +167,7 @@
             createdtime:"2019.01.15",
             platform: "Mac",
             createduser: "Vehbi Kurtcebe",
-            status: "Active",
+            status: "Connected",
           },
           {
             name: 'HomePC',
@@ -189,7 +175,7 @@
             createdtime: "2019.01.14",
             platform: "Windows",
             createduser: "Lorem Ipsum",
-            status: "Active",
+            status: "Connected",
           },
           {
             name: 'WorkPC',
@@ -197,7 +183,7 @@
             createdtime: "2019.01.13",
             platform: "Windows",
             createduser: "John Doe",
-            status: "Deactive",
+            status: "Disconnected",
           },
           {
             name: 'MyWindows',
@@ -205,7 +191,7 @@
             createdtime: "2019.01.12",
             platform: "Mac",
             createduser: "Salamanya Doruk",
-            status: "Active",
+            status: "Connected",
           },
           {
             name: 'Jelly PC',
@@ -213,7 +199,7 @@
             createdtime: "2019.01.11",
             platform: "Windows",
             createduser: "Ahmet Ozbey",
-            status: "Deactive",
+            status: "Disconnected",
           },
           {
             name: 'PC Lolli',
@@ -221,7 +207,7 @@
             createdtime: "2019.02.17",
             platform: "Mac",
             createduser: "John Doe",
-            status: "Active",
+            status: "Connected",
           },
           {
             name: 'HoneyPC',
@@ -229,7 +215,7 @@
             createdtime: "2020.01.17",
             platform: "Linux",
             createduser: "John Doe",
-            status: "Active",
+            status: "Connected",
           },
           {
             name: 'MAC OS ',
@@ -237,7 +223,7 @@
             createdtime: "2017.01.17",
             platform: "Windows",
             createduser: "John Doe",
-            status: "Active",
+            status: "Connected",
           },
           {
             name: 'Other PC',
@@ -245,7 +231,7 @@
             createdtime: "2018.01.17",
             platform: "Windows",
             createduser: "John Doe",
-            status: "Active",
+            status: "Connected",
           },
         ]
       },
@@ -285,10 +271,10 @@
 .shadow-xl	{
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
-.Active{
+.Connected{
     background-color: #27ae60!important;
 }
-.Deactive{
+.Disconnected{
     background-color: #c0392b!important;
 }
 </style>

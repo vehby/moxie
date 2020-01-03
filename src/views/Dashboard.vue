@@ -2,96 +2,22 @@
     <div>
         <v-container class="grey lighten-5">
             <v-row>
-                <v-col cols="12" sm="3">
-                     <v-card
-                        class="mx-auto shadow-xl"
-                    >
-                        <v-list-item three-line>
-                            <v-list-item-avatar
-                            tile
-                            size="80"
-                            color="grey lighten-4">
-                            <v-icon large>laptop_mac</v-icon>
-                            </v-list-item-avatar>
-                        <v-list-item-content>
-                            <div class="overline mb-4">AGENT</div>
-                            <v-list-item-title class="headline mb-1">12</v-list-item-title>
-                            <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                        </v-list-item-content>
 
-                        
+                <v-col cols="12" sm="3" v-for="item in smallWidget" :key="item.swh1">
+                    <v-card class="mx-auto shadow-xl">
+                        <v-list-item three-line>
+                            <v-list-item-avatar tile size="80" color="grey lighten-4">
+                                <v-icon large>{{item.swicon}}</v-icon>
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <div class="overline mb-4">{{item.swh1}}</div>
+                                <v-list-item-title class="headline mb-1">{{item.swcount}}</v-list-item-title>
+                                <v-list-item-subtitle>{{item.swdesc}}</v-list-item-subtitle>
+                            </v-list-item-content>
                         </v-list-item>
                     </v-card>
                 </v-col>
-
-                <v-col cols="12" sm="3">
-                     <v-card
-                        class="mx-auto shadow-xl"
-                    >
-                    
-                        <v-list-item three-line>
-                            <v-list-item-avatar
-                            tile
-                            size="80"
-                            color="grey lighten-4">
-                            <v-icon large>queue_play_next</v-icon>
-                            </v-list-item-avatar>
-                        <v-list-item-content>
-                            <div class="overline mb-4">SCRIPTS</div>
-                            <v-list-item-title class="headline mb-1">21</v-list-item-title>
-                            <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                        </v-list-item-content>
-
-                        
-                        </v-list-item>
-                    </v-card>
-                </v-col>
-
-                <v-col cols="12" sm="3">
-                     <v-card
-                        class="mx-auto shadow-xl"
-                    >
-                    
-                        <v-list-item three-line>
-                            <v-list-item-avatar
-                            tile
-                            size="80"
-                            color="grey lighten-4">
-                            <v-icon large>playlist_add_check</v-icon>
-                            </v-list-item-avatar>
-                        <v-list-item-content>
-                            <div class="overline mb-4">TASKS</div>
-                            <v-list-item-title class="headline mb-1">9</v-list-item-title>
-                            <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                        </v-list-item-content>
-
-                        
-                        </v-list-item>
-                    </v-card>
-                </v-col>
-
-                 <v-col cols="12" sm="3">
-                    <v-card
-                        class="mx-auto shadow-xl"
-                    >
-                    
-                        <v-list-item three-line>
-                            <v-list-item-avatar
-                            tile
-                            size="80"
-                            color="grey lighten-4">
-                            <v-icon large>playlist_play</v-icon>
-                            </v-list-item-avatar>
-                        <v-list-item-content>
-                            <div class="overline mb-4">TRIGGER</div>
-                            <v-list-item-title class="headline mb-1">9</v-list-item-title>
-                            <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                        </v-list-item-content>
-
-                        
-                        </v-list-item>
-                    </v-card>    
-                </v-col>
+            
             </v-row>
         </v-container>
 
@@ -127,6 +53,12 @@
 export default {
     data () {
       return {
+          smallWidget: [
+            { swicon: 'laptop_mac', swh1: 'Agent', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
+            { swicon: 'queue_play_next', swh1: 'SCRIPTS', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
+            { swicon: 'playlist_add_check', swh1: 'TASKS', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
+            { swicon: 'playlist_play', swh1: 'TRIGGER', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
+          ],
         // Array will be automatically processed with visualization.arrayToDataTable function
         chartData: [
           ['Status', 'Per'],
