@@ -8,7 +8,7 @@
       <v-toolbar flat color="white">
         <v-toolbar-title>Agents</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialogNewAgent" max-width="500px">
           <template v-slot:activator="{ on }">
             <v-btn color="primary" v-on="on" depressed>
                 <v-icon left>add</v-icon>
@@ -28,11 +28,58 @@
               <v-container>
                    
                 <v-row>
-                     
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="12" md="12">
                     <v-text-field v-model="editedItem.name" label="Agent Name" required :rules="nameRules"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="8">
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="editedItem.key" label="Key" required :rules="keyRules"></v-text-field>
+                  </v-col>
+                  <!-- <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.createdtime" label="Created Time"></v-text-field>
+                  </v-col> -->
+                  <!-- <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.platform" label="Platform"></v-text-field>
+                  </v-col> -->
+                  <!-- <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="editedItem.createduser" label="Created User"></v-text-field>
+                  </v-col> -->
+                </v-row>
+                
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn depressed color="primary" @click="save">Save</v-btn>
+              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+            </v-card-actions>
+             </v-form>
+
+          </v-card>
+        </v-dialog>
+
+
+
+                <v-dialog v-model="dialogEditAgent" max-width="500px">
+       
+          <v-card>
+              <v-form
+      ref="form"
+      v-model="valid"
+      :lazy-validation="lazy"
+    >
+            <v-card-title>
+              <span class="headline">{{ formTitle }}</span>
+            </v-card-title>
+
+            <v-card-text>
+              <v-container>
+                   
+                <v-row>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="editedItem.name" label="Agent Name" required :rules="nameRules"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="12" md="12">
                     <v-text-field v-model="editedItem.key" label="Key" required :rules="keyRules"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
@@ -44,7 +91,6 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.createduser" label="Created User"></v-text-field>
                   </v-col>
-                 
                 </v-row>
                 
               </v-container>
@@ -52,12 +98,22 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save" >Save</v-btn>
+              <v-btn depressed color="primary" @click="save2">Save</v-btn>
+              <v-btn color="blue darken-1" text @click="close2">Cancel</v-btn>
             </v-card-actions>
              </v-form>
+
           </v-card>
         </v-dialog>
+
+
+
+
+
+
+
+
+
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
@@ -91,22 +147,19 @@
 <script>
   export default {
     data: () => ({
-      dialog: false,
+      dialogNewAgent: false,
+      dialogEditAgent: false,
       valid: false,
       nameRules: [
         v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters',
       ],
       keyRules: [
         v => !!v || 'Key is required',
-        v => v.length >= 10 || 'Key must be less than 10 characters',
       ],
-      date: new Date().toISOString().substr(0, 7),
       menu: false,
       modal: false,
       headers: [
-        {
-          text: 'Agent Name', align: 'left', sortable: true, value: 'name'},
+        {text: 'Agent Name', align: 'left', sortable: true, value: 'name'},
         { text: 'Key', value: 'key' },
         { text: 'Created Time', value: 'createdtime' },
         { text: 'Platform', value: 'platform' },
@@ -141,7 +194,10 @@
     },
 
     watch: {
-      dialog (val) {
+      dialogNewAgent (val) {
+        val || this.close()
+      },
+      dialogEditAgent (val) {
         val || this.close()
       },
     },
@@ -239,7 +295,7 @@
       editItem (item) {
         this.editedIndex = this.agents.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        this.dialog = true
+        this.dialogEditAgent = true
       },
 
       deleteItem (item) {
@@ -248,7 +304,15 @@
       },
 
       close () {
-        this.dialog = false
+        this.dialogNewAgent = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        }, 300)
+      },
+
+      close2 () {
+        this.dialogEditAgent = false
         setTimeout(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
@@ -263,7 +327,23 @@
         }
         this.close()
       },
+
+      save2 () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.agents[this.editedIndex], this.editedItem)
+        } else {
+          this.agents.push(this.editedItem)
+        }
+        this.close2()
+      },
+
+
     },
+
+    
+
+    
+    
   }
 </script>
 

@@ -6,13 +6,13 @@
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
-        <v-toolbar-title>Agents</v-toolbar-title>
+        <v-toolbar-title>Tasks</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
+        <v-dialog v-model="dialog_new_task" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn outlined color="red" v-on="on">
+            <v-btn  color="primary" depressed v-on="on">
                 <v-icon left>add</v-icon>
-                New Agent</v-btn>
+                New Task</v-btn>
           </template>
           <v-card>
               <v-form
@@ -30,20 +30,18 @@
                 <v-row>
                      
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.name" label="Agent Name" required :rules="nameRules"></v-text-field>
+                    <v-text-field v-model="editedItem.scheduleName" label="Schedule Name" required :rules="nameRules"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="8">
-                    <v-text-field v-model="editedItem.key" label="Key" required :rules="keyRules"></v-text-field>
+                    <v-text-field v-model="editedItem.nextRunTime" label="Next Run Time"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field v-model="editedItem.createdtime" label="Created Time"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.platform" label="Platform"></v-text-field>
+                    <v-text-field v-model="editedItem.lastRunTime " label="Last Run Time"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.createduser" label="Created User"></v-text-field>
-                  </v-col>
+                 
                  
                 </v-row>
                 
@@ -52,8 +50,8 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
+              <v-btn depressed color="primary" @click="save" >Save</v-btn>
               <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-              <v-btn color="blue darken-1" text @click="save" >Save</v-btn>
             </v-card-actions>
              </v-form>
           </v-card>
@@ -68,12 +66,7 @@
       >
         play_arrow
       </v-icon>
-      <v-icon
-        small
-        class="mr-2"
-      >
-        pause
-      </v-icon>
+     
 
       <v-icon
         small
@@ -89,11 +82,17 @@
         delete
       </v-icon>
     </template>
+
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize">Reset</v-btn>
     </template>
+    
+    <template v-slot:item.lastRunResult="{ item }">
+      <v-icon :class="item.lastRunResult" small left>check</v-icon>
+      <v-p :class="item.lastRunResult" dark>{{ item.lastRunResult }}</v-p>
+    </template>
 
-    <template v-slot:item.status="{ item }">
+     <template v-slot:item.status="{ item }">
       <v-chip :color="item.status" dark>{{ item.status }}</v-chip>
     </template>
 
@@ -105,57 +104,49 @@
 <script>
   export default {
     data: () => ({
-      dialog: false,
+      dialog_new_task: false,
       valid: false,
       nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 10 || 'Name must be less than 10 characters',
+        v => !!v || 'Schedule Name is required',
       ],
-      keyRules: [
-        v => !!v || 'Key is required',
-        v => v.length >= 10 || 'Key must be less than 10 characters',
-      ],
-      date: new Date().toISOString().substr(0, 7),
       menu: false,
       modal: false,
       headers: [
-        {
-          text: 'Agent Name', align: 'left', sortable: true, value: 'name'},
-        { text: 'Key', value: 'key' },
+        {text: 'Schedule Name', align: 'left', sortable: true, value: 'scheduleName'},
         { text: 'Created Time', value: 'createdtime' },
-        { text: 'Platform', value: 'platform' },
-        { text: 'Created User', value: 'createduser' },
+        { text: 'Next Run Time', value: 'nextRunTime' },
+        { text: 'Last Run Time', value: 'lastRunTime' },
+        { text: 'Last Run Result', value: 'lastRunResult' },
         { text: 'Status', value: 'status' },
         { text: 'Actions', value: 'action', sortable: false },
       ],
       agents: [],
       editedIndex: -1,
       editedItem: {
-        name: '',
-        key: '',
+        scheduleName: '',
+        nextRunTime: '',
         createdtime :"",
-        platform: '',
-        createduser: '',
+        lastRunTime: '',
+        lastRunResult: '',
         status:'Deactive'
       },
       defaultItem: {
-        name: '',
-        key: '',
+        scheduleName: '',
+        nextRunTime: '',
         createdtime :'',
-        platform: '',
-        createduser: ''
-        
+        lastRunTime: '',
+        lastRunResult: ''
       },
     }),
 
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'New Agent' : 'Edit Agent'
+        return this.editedIndex === -1 ? 'New Task' : 'Edit Task'
       },
     },
 
     watch: {
-      dialog (val) {
+      dialog_new_task (val) {
         val || this.close()
       },
     },
@@ -168,84 +159,84 @@
       initialize () {
         this.agents = [
           {
-            name: 'MyWindows',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'Urgent Tasks',
+            nextRunTime: "2019.01.17",
             createdtime: "2019.01.17",
-            platform: "Windows",
-            createduser: "Murat Çim",
-            status: "Active",
+            lastRunTime: "2019.01.17",
+            lastRunResult: "Succes",
+            status: "Runing",
           },
           {
-            name: 'MyPC',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'Routine Tasks',
+            nextRunTime: "2019.01.17",
             createdtime:"2019.01.15",
-            platform: "Mac",
-            createduser: "Vehbi Kurtcebe",
-            status: "Active",
+            lastRunTime: "2016.04.05",
+            lastRunResult: "Succes",
+            status: "Runing",
           },
           {
-            name: 'HomePC',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'Lorem Taks',
+            nextRunTime: "2019.01.17",
             createdtime: "2019.01.14",
-            platform: "Windows",
-            createduser: "Lorem Ipsum",
-            status: "Active",
+            lastRunTime: "2019.01.17",
+            lastRunResult: "Fail",
+            status: "Suspended",
           },
           {
-            name: 'WorkPC',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'Urgent Tasks',
+            nextRunTime: "2019.01.17",
             createdtime: "2019.01.13",
-            platform: "Windows",
-            createduser: "John Doe",
-            status: "Deactive",
+            lastRunTime: "2019.01.17",
+            lastRunResult: "Succes",
+            status: "Runing",
           },
           {
-            name: 'MyWindows',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'My2019.01.17',
+            nextRunTime: "2019.01.17",
             createdtime: "2019.01.12",
-            platform: "Mac",
-            createduser: "Salamanya Doruk",
-            status: "Active",
+            lastRunTime: "2015.01.21",
+            lastRunResult: "Succes",
+            status: "Runing",
           },
           {
-            name: 'Jelly PC',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'Jelly PC',
+            nextRunTime: "2019.01.17",
             createdtime: "2019.01.11",
-            platform: "Windows",
-            createduser: "Ahmet Ozbey",
-            status: "Deactive",
+            lastRunTime: "2019.01.17",
+            lastRunResult: "Succes",
+            status: "Suspended",
           },
           {
-            name: 'PC Lolli',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'PC Lolli',
+            nextRunTime: "2019.01.17",
             createdtime: "2019.02.17",
-            platform: "Mac",
-            createduser: "John Doe",
-            status: "Active",
+            lastRunTime: "2016.04.05",
+            lastRunResult: "Fail",
+            status: "Runing",
           },
           {
-            name: 'HoneyPC',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'HoneyPC',
+            nextRunTime: "2019.01.17",
             createdtime: "2020.01.17",
-            platform: "Linux",
-            createduser: "John Doe",
-            status: "Active",
+            lastRunTime: "2019.04.12",
+            lastRunResult: "Fail",
+            status: "Runing",
           },
           {
-            name: 'MAC OS ',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'MAC OS ',
+            nextRunTime: "2019.01.17",
             createdtime: "2017.01.17",
-            platform: "Windows",
-            createduser: "John Doe",
-            status: "Active",
+            lastRunTime: "2019.01.17",
+            lastRunResult: "Succes",
+            status: "Runing",
           },
           {
-            name: 'Other PC',
-            key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+            scheduleName: 'Other PC',
+            nextRunTime: "2019.01.17",
             createdtime: "2018.01.17",
-            platform: "Windows",
-            createduser: "John Doe",
-            status: "Active",
+            lastRunTime: "2019.02.03",
+            lastRunResult: "Succes",
+            status: "Runing",
           },
         ]
       },
@@ -253,7 +244,7 @@
       editItem (item) {
         this.editedIndex = this.agents.indexOf(item)
         this.editedItem = Object.assign({}, item)
-        this.dialog = true
+        this.dialog_new_task = true
       },
 
       deleteItem (item) {
@@ -262,7 +253,7 @@
       },
 
       close () {
-        this.dialog = false
+        this.dialog_new_task = false
         setTimeout(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
@@ -285,10 +276,16 @@
 .shadow-xl	{
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
-.Active{
+.Runing{
     background-color: #27ae60!important;
 }
-.Deactive{
+.Suspended{
     background-color: #c0392b!important;
+}
+.Succes {
+  color: #27ae60!important;
+}
+.Fail{
+  color: #c0392b!important;
 }
 </style>

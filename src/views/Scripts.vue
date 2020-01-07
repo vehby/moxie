@@ -27,20 +27,20 @@
                    
                 <v-row>
                      
-                  <v-col cols="12" sm="6" md="6">
+                  <v-col cols="12" sm="12" md="12">
                     <v-text-field v-model="editedItem.scriptName" label="Script Name" required :rules="scriptNameRules"></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6" md="6">
+                  <!-- <v-col cols="12" sm="6" md="6">
                     <v-text-field disabled v-model="editedItem.createdtime" label="Created Time"></v-text-field>
-                  </v-col>
+                  </v-col> -->
                   <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.commandLine" label="Command Line" required :rules="commandLineRules"></v-text-field>
+                    <v-textarea v-model="editedItem.commandLine" label="Command Line" required :rules="commandLineRules"></v-textarea>
                   </v-col>
                   <v-col cols="12" sm="6" md="12">
                     <v-text-field v-model="editedItem.description" label="Description" required :rules="descriptionRules"></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="12">
-                    <v-file-input show-size counter multiple label="File input" required :rules="filesRules"></v-file-input>
+                    <v-file-input show-size counter label="File input" required :rules="filesRules"></v-file-input>
                   </v-col>
 
 
