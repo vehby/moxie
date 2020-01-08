@@ -34,7 +34,7 @@
             </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar app clipped-left color="red" :elevation="2" dense class="white--text" height="65">
+        <v-app-bar app clipped-left color="primary" dense class="white--text shadow-md" height="65">
             <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" />
             <v-img src="../assets/moxie-logo.png" lazy-src="../assets/moxie-logo.png" aspect-ratio="1" max-width="24" max-height="24" class="mr-2"></v-img>
            <div class="moxielogo">
@@ -116,4 +116,8 @@
     text-decoration: none;
     color:#fff; 
 }
+.shadow-md {
+    box-shadow:0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -2px rgba(0, 0, 0, .05);
+}
 </style>
+

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <NavBar/>
-    <DatePicker/>
+    
 
   </v-app>
 </template>

@@ -8,6 +8,8 @@ import Trigger from './views/Trigger.vue'
 import Logs from './views/Logs.vue'
 import UserManager from './views/UserManager.vue'
 import Settings from './views/Settings'
+import Login from './views/Login'
+import SignUp from './views/Signup'
 
 Vue.use(Router)
 
@@ -59,6 +61,16 @@ export default new Router({
       path : '/settings',
       name : 'settings',
       component : Settings
+    },
+    {
+      path : '/login',
+      name : 'login',
+      component : Login
+    },
+    {
+      path : '/signup',
+      name : 'singup',
+      component : SignUp
     }
   ]
 })
