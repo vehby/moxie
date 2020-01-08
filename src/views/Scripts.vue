@@ -1,13 +1,23 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="agents"
+    :items="scripts"
     class="shadow-xl mx-5 my-5"
+     :search="search"
   >
     <template v-slot:top>
       <v-toolbar flat color="white">
         <v-toolbar-title>Scripts</v-toolbar-title>
         <v-spacer></v-spacer>
+         <v-col cols="6" sm="4" md="2" xs="6">
+                 <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details>
+            </v-text-field>
+            </v-col>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
             <v-btn color="primary" v-on="on" depressed>
@@ -28,7 +38,7 @@
                 <v-row>
                      
                   <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="editedItem.scriptName" label="Script Name" required :rules="scriptNameRules"></v-text-field>
+                    <v-text-field v-model="editedItem.scriptName" autofocus label="Script Name" required :rules="scriptNameRules"></v-text-field>
                   </v-col>
                   <!-- <v-col cols="12" sm="6" md="6">
                     <v-text-field disabled v-model="editedItem.createdtime" label="Created Time"></v-text-field>
@@ -98,6 +108,7 @@
 <script>
   export default {
     data: () => ({
+      search: '',
       dialog: false,
       valid: false,
       scriptNameRules: [
@@ -121,7 +132,7 @@
         { text: 'Created Time', value: 'createdtime' },
         { text: 'Actions', value: 'action', sortable: false },
       ],
-      agents: [],
+      scripts: [],
       editedIndex: -1,
       editedItem: {
         scriptName: '',
@@ -158,7 +169,7 @@
 
     methods: {
       initialize () {
-        this.agents = [
+        this.scripts = [
           {
             scriptName: 'MyWindows',
             createdtime: "2019.01.17",
@@ -236,14 +247,14 @@
       },
 
       editItem (item) {
-        this.editedIndex = this.agents.indexOf(item)
+        this.editedIndex = this.scripts.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.agents.indexOf(item)
-        confirm('Are you sure you want to delete this Agent?') && this.agents.splice(index, 1)
+        const index = this.scripts.indexOf(item)
+        confirm('Are you sure you want to delete this Agent?') && this.scripts.splice(index, 1)
       },
 
       close () {
@@ -256,9 +267,9 @@
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.agents[this.editedIndex], this.editedItem)
+          Object.assign(this.scripts[this.editedIndex], this.editedItem)
         } else {
-          this.agents.push(this.editedItem)
+          this.scripts.push(this.editedItem)
         }
         this.close()
       },

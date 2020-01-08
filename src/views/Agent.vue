@@ -1,9 +1,18 @@
 <template>
-<v-data-table :headers="headers" :items="agents" class="shadow-xl mx-5 my-5">
+<v-data-table :headers="headers" :items="agents" class="shadow-xl mx-5 my-5"  :search="search">
     <template v-slot:top>
         <v-toolbar flat color="white">
             <v-toolbar-title>Agents</v-toolbar-title>
             <v-spacer></v-spacer>
+             <v-col cols="6" sm="4" md="2" xs="6">
+                 <v-text-field
+            v-model="search"
+            append-icon="search"
+            label="Search"
+            single-line
+            hide-details>
+            </v-text-field>
+            </v-col>
             <v-dialog v-model="dialogNewAgent" max-width="500px">
                 <template v-slot:activator="{ on }">
                     <v-btn color="primary" v-on="on" depressed>
@@ -22,7 +31,7 @@
 
                                 <v-row>
                                     <v-col cols="12" sm="12" md="12">
-                                        <v-text-field v-model="editedItem.name" label="Agent Name" required :rules="nameRules"></v-text-field>
+                                        <v-text-field v-model="editedItem.name" autofocus label="Agent Name" required :rules="nameRules"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="12" md="12">
                                         <v-text-field v-model="editedItem.key" label="Key" required :rules="keyRules"></v-text-field>
@@ -117,6 +126,7 @@
 <script>
 export default {
     data: () => ({
+        search: '',
         dialogNewAgent: false,
         dialogEditAgent: false,
         valid: false,
