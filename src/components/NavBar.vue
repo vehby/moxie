@@ -49,7 +49,6 @@
         <v-menu>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn v-on="on" dark icon class="pr-4">
-
                     <v-badge color="white red--text">
                         <template v-slot:badge>5</template>
                         <v-icon>notifications_none</v-icon>
@@ -57,21 +56,24 @@
                 </v-btn>
 
             </template>
-            <v-list>
-                <v-subheader>Notification</v-subheader>
-                <v-list-item @click="method" link>
-                    <v-list-item-title>Log Out</v-list-item-title>
-                </v-list-item>
+            <v-card class="mx-auto" min-width="320" tile>
+                <v-list>
 
-                <router-link to="/settings">
-                    <v-list-item link>
+                    <v-subheader>Notification</v-subheader>
+                    <v-list-item @click="method">
                         <v-list-item-title>
-                            Settings
+                            <p>Task One is failled</p>
                         </v-list-item-title>
                     </v-list-item>
-                </router-link>
+                    <v-list-item link>
+                        <v-list-item-title>
+                            Task One is succes
+                        </v-list-item-title>
+                    </v-list-item>
 
-            </v-list>
+                </v-list>
+            </v-card>
+
         </v-menu>
 
         <v-menu>
