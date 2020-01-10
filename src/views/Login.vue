@@ -15,13 +15,13 @@
 
                     </v-toolbar>
                     <v-card-text>
-                        <v-form>
-                            <v-text-field label="Login" name="login" prepend-icon="person" type="text" outlined/>
+                        <v-form class="pa-5">
+                            <v-text-field label="E-Mail" name="email" prepend-icon="mail" type="text" outlined required :rules="emailRules"/>
 
-                            <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" outlined/>
+                            <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" outlined required :rules="passwordRules"/>
                         </v-form>
                         <p class="text-right">
-                            <router-link to="/lost-password"> Forgot password?</router-link>
+                            <router-link to="/lostpassword"> Forgot password?</router-link>
                         </p>
                     </v-card-text>
                     <v-card-actions>
@@ -44,6 +44,18 @@
 
 <script>
 export default {
+     data() {
+        return {
+            emailRules: [
+                v => !!v || 'E-Mail is required',
+                v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+            ],
+            passwordRules: [
+                v => !!v || 'Password is required',
+            ]
+        }
+    },
+    
     props: {
         source: String,
     },

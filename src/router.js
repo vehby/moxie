@@ -10,6 +10,7 @@ import UserManager from './views/UserManager.vue'
 import Settings from './views/Settings'
 import Login from './views/Login'
 import SignUp from './views/Signup'
+import Lostpassword from './views/Lostpassword'
 
 Vue.use(Router)
 
@@ -71,6 +72,11 @@ export default new Router({
       path : '/signup',
       name : 'singup',
       component : SignUp
+    },
+    {
+    path : '/lostpassword',
+    name : 'lostpassword',
+    component : Lostpassword
     }
   ]
 })

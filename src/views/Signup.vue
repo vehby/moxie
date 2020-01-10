@@ -15,16 +15,15 @@
 
                     </v-toolbar>
                     <v-card-text>
-                        <v-form>
+                        <v-form class="pa-5">
                             <v-text-field label="Organization Name" v-model="organiztionName" type="text" outlined/>
                             <v-text-field label="First Name" v-model="firsName" type="text" required :rules="firstNameRules" outlined/>
                             <v-text-field label="Last Name" v-model="lastName" type="text" required :rules="lastNameRules" outlined/>
                             <v-text-field label="E-Mail" v-model="eMail" type="text" required :rules="emailRules" outlined/>
-
-                            <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" outlined/>
+                            <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" required :rules="passwordRules" outlined/>
                         </v-form>
                         <p class="text-right">
-                            <router-link to="/lost-password"> Forgot password?</router-link>
+                            <router-link to="/lostpassword"> Forgot password?</router-link>
                         </p>
                     </v-card-text>
                     <v-card-actions>
@@ -33,7 +32,7 @@
                     </v-card-actions>
                     <v-card-actions class="text-center">
                         <div class="text-center">
-                            <p class="text-center">Don’t have an account? <router-link to="/signup">Sign up</router-link>
+                            <p class="text-center">Already have an account? <router-link to="/login"> Log in</router-link>
                             </p>
                         </div>
 
@@ -67,6 +66,9 @@ export default {
             lastNameRules: [
                 v => !!v || 'Name is required', 
             ],
+            passwordRules: [
+                v => !!v || 'Password is required',
+            ]
       }
     },
      props: {

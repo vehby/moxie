@@ -4,7 +4,8 @@
             <v-row>
 
                 <v-col cols="12" sm="3" v-for="item in smallWidget" :key="item.swh1">
-                    <v-card class="mx-auto shadow-xl">
+                  
+                    <v-card class="mx-auto shadow-xl" router :to="item.link" link>
                         <v-list-item three-line>
                             <v-list-item-avatar tile size="80" color="grey lighten-4">
                                 <v-icon large>{{item.swicon}}</v-icon>
@@ -16,6 +17,7 @@
                             </v-list-item-content>
                         </v-list-item>
                     </v-card>
+                    
                 </v-col>
             
             </v-row>
@@ -54,10 +56,10 @@ export default {
     data () {
       return {
           smallWidget: [
-            { swicon: 'laptop_mac', swh1: 'Agent', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
-            { swicon: 'queue_play_next', swh1: 'SCRIPTS', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
-            { swicon: 'playlist_add_check', swh1: 'TASKS', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
-            { swicon: 'playlist_play', swh1: 'TRIGGER', swcount:'21',swdesc :'Greyhound divisely hello coldly' },
+            { swicon: 'laptop_mac', swh1: 'Agent', swcount:'21',swdesc :'Greyhound divisely hello coldly', link :'/agent' },
+            { swicon: 'queue_play_next', swh1: 'SCRIPTS', swcount:'21',swdesc :'Greyhound divisely hello coldly', link:'/scripts' },
+            { swicon: 'playlist_add_check', swh1: 'TASKS', swcount:'21',swdesc :'Greyhound divisely hello coldly', link:'/tasks' },
+            { swicon: 'playlist_play', swh1: 'TRIGGER', swcount:'21',swdesc :'Greyhound divisely hello coldly', link:'/trigger' },
           ],
         // Array will be automatically processed with visualization.arrayToDataTable function
         chartData: [
