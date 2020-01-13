@@ -3,19 +3,14 @@
     <template v-slot:top>
         <v-toolbar flat color="white">
             <div class="d-none d-sm-flex">
-            <v-toolbar-title>Tasks</v-toolbar-title>
+                <v-toolbar-title>Tasks</v-toolbar-title>
             </div>
             <v-spacer></v-spacer>
             <v-row>
-            <v-col cols="10" sm="3" md="4" offset-md="8" class="px-5">
-                 <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Search"
-            single-line
-            hide-details>
-            </v-text-field>
-            </v-col>
+                <v-col cols="10" sm="3" md="4" offset-md="8" class="px-5">
+                    <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details>
+                    </v-text-field>
+                </v-col>
             </v-row>
             <v-dialog v-model="dialog_new_task" max-width="500px">
                 <template v-slot:activator="{ on }">
@@ -38,12 +33,32 @@
                                     <v-col cols="12" sm="6" md="12">
                                         <v-text-field v-model="editedItem.scheduleName" label="Schedule Name" required :rules="nameRules"></v-text-field>
                                     </v-col>
-                                    <v-col cols="12" sm="6" md="6">
-                                        <v-datetime-picker v-model="editedItem.task_begining_datetime" label="Beginning Date" :text-field-props="textFieldProps" :date-picker-props="dateProps" :time-picker-props="timeProps" time-format="HH:mm:ss"></v-datetime-picker>
+                                    <v-col cols="12" sm="6" md="12">
+                                        <v-text-field v-model="editedItem.cronJob" label="Cron Job" required :rules="cronJob"></v-text-field>
                                     </v-col>
-                                    <v-col cols="12" sm="6" md="6">
-                                        <v-datetime-picker v-model="editedItem.task_expiry_datetime" label="Expiry Date" :text-field-props="textFieldProps" :date-picker-props="dateProps" :time-picker-props="timeProps" time-format="HH:mm:ss"></v-datetime-picker>
+
+
+                                     <v-col cols="12">
+                                        <v-autocomplete
+                                            v-model="editedItem.users"
+                                            :items="userName"
+                                            dense
+                                            
+                                            multiple
+                                            label="Select User"
+                                        ></v-autocomplete>
+                                    </v-col>                                  
+
+                                     <v-col cols="12">
+                                        <v-autocomplete
+                                            v-model="editedItem.scripts"
+                                            :items="scriptName"
+                                            dense
+                                            
+                                            label="Script"
+                                        ></v-autocomplete>
                                     </v-col>
+
                                 </v-row>
 
                             </v-container>
@@ -59,7 +74,7 @@
             </v-dialog>
 
             <v-dialog v-model="dialog_edit_task" max-width="500px">
-             
+
                 <v-card>
                     <v-form ref="form" v-model="valid" :lazy-validation="lazy">
                         <v-card-title>
@@ -74,12 +89,19 @@
                                     <v-col cols="12" sm="6" md="12">
                                         <v-text-field v-model="editedItem.scheduleName" label="Schedule Name" required :rules="nameRules"></v-text-field>
                                     </v-col>
-                                    <v-col cols="12" sm="6" md="6">
-                                        <v-datetime-picker v-model="editedItem.task_begining_datetime" label="Beginning Date" :text-field-props="textFieldProps" :date-picker-props="dateProps" :time-picker-props="timeProps" time-format="HH:mm:ss"></v-datetime-picker>
+                                    <v-col cols="12" sm="6" md="12">
+                                        <v-text-field v-model="editedItem.cronJob" label="Cron Job" required :rules="cronJob"></v-text-field>
                                     </v-col>
-                                    <v-col cols="12" sm="6" md="6">
-                                        <v-datetime-picker v-model="editedItem.task_expiry_datetime" label="Expiry Date" :text-field-props="textFieldProps" :date-picker-props="dateProps" :time-picker-props="timeProps" time-format="HH:mm:ss"></v-datetime-picker>
+
+                                     <v-col cols="12" sm="12">
+                                        <v-select v-model="editedItem.users" :items="userName" label="Users" multiple chips hint="Select User" persistent-hint prepend-icon="account_circle"></v-select>
                                     </v-col>
+
+                                    <v-col cols="12">
+                                        <v-select v-model="scripts" :items="editedItem.scriptName" menu-props="auto" label="Script" hide-details prepend-icon="map" single-line></v-select>
+                                    </v-col>
+
+
                                 </v-row>
 
                             </v-container>
@@ -136,6 +158,15 @@ export default {
             appendIcon: 'event'
         },
 
+        users: [],
+        userName: [
+            'Ahmet', 'Mehmet', 'Ali', 'John', 'Doe', 'Ayşe', 'Meltem'
+        ],
+        scripts: [],
+        scriptName: [
+            'MyWindows', 'Home PC', 'Other PC', 'Mac Book', 'Lorem', 'Ipsum'
+        ],
+
         menu2: false,
         dialog_new_task: false,
         dialog_edit_task: false,
@@ -180,7 +211,9 @@ export default {
         tasks: [],
         editedIndex: -1,
         editedItem: {
-            task_begining_datetime: '',
+            users:'',
+            scripts:'',
+            cronJob: '',
             scheduleName: '',
             createdtime: '',
             nextRunTime: '',
@@ -189,7 +222,9 @@ export default {
             status: 'Deactive'
         },
         defaultItem: {
-            task_begining_datetime: '',
+            users:'',
+            scripts:'',
+            cronJob: '',
             scheduleName: '',
             createdtime: '',
             nextRunTime: '',
@@ -341,7 +376,7 @@ export default {
 
         save2() {
             if (this.editedIndex > -1) {
-              
+
                 Object.assign(this.tasks[this.editedIndex], this.editedItem)
             } else {
                 this.tasks.push(this.editedItem)

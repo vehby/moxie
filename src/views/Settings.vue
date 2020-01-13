@@ -13,7 +13,9 @@
                             <v-text-field label="First Name" v-model="firstName" type="text" required :rules="firstNameRules" outlined />
                             <v-text-field label="Last Name" v-model="lastName" type="text" required :rules="lastNameRules" outlined />
                             <v-text-field label="E-Mail" v-model="eMail" type="text" required :rules="emailRules" outlined />
-                            <v-text-field id="password" v-model="password" label="Password" name="password" prepend-icon="lock" type="password" required :rules="passwordRules" outlined />
+                            <v-text-field id="password" v-model="password" label="Password" name="password" type="password" required :rules="passwordRules" outlined />
+                            <v-text-field id="password" v-model="password" label="Re Password" name="password" type="password" required :rules="passwordRules" outlined />
+
                         </v-form>
 
                     </v-card-text>

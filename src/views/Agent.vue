@@ -37,18 +37,6 @@
                                     <v-col cols="12" sm="12" md="12">
                                         <v-text-field v-model="editedItem.name" autofocus label="Agent Name" required :rules="nameRules"></v-text-field>
                                     </v-col>
-                                    <v-col cols="12" sm="12" md="12">
-                                        <v-text-field v-model="editedItem.key" label="Key" required :rules="keyRules"></v-text-field>
-                                    </v-col>
-                                    <!-- <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.createdtime" label="Created Time"></v-text-field>
-                  </v-col> -->
-                                    <!-- <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.platform" label="Platform"></v-text-field>
-                  </v-col> -->
-                                    <!-- <v-col cols="12" sm="6" md="4">
-                    <v-text-field v-model="editedItem.createduser" label="Created User"></v-text-field>
-                  </v-col> -->
                                 </v-row>
 
                             </v-container>
@@ -79,18 +67,7 @@
                                     <v-col cols="12" sm="12" md="12">
                                         <v-text-field v-model="editedItem.name" label="Agent Name" required :rules="nameRules"></v-text-field>
                                     </v-col>
-                                    <v-col cols="12" sm="12" md="12">
-                                        <v-text-field v-model="editedItem.key" label="Key" required :rules="keyRules"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.createdtime" label="Created Time"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.platform" label="Platform"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.createduser" label="Created User"></v-text-field>
-                                    </v-col>
+                                    
                                 </v-row>
 
                             </v-container>
