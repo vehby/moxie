@@ -1,8 +1,6 @@
 <template>
   <v-app>
     <NavBar/>
-    
-
   </v-app>
 </template>
 
@@ -14,6 +12,7 @@ export default {
   components : {
     NavBar,
   },
+
   data: () => ({
     //
   }),

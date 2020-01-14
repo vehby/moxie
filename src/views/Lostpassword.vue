@@ -2,8 +2,7 @@
 <v-content>
     <v-container class="fill-height" fluid>
         <v-row align="center" justify="center" class="my-4">
-            <v-img src="../assets/moxie-logo.png" lazy-src="../assets/moxie-logo.png" aspect-ratio="1" max-width="38" max-height="38" class="mr-2 float-left"></v-img>
-            <span class="display-1 font-weight-light">MOXIE <span class="font-weight-regular"> STUDIO </span></span>
+            <v-img src="../assets/zozi-logo-black.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1"  max-width="207" max-height="21" class="mr-2 float-left"></v-img>
         </v-row>
         <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
