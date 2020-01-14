@@ -37,26 +37,12 @@
                                         <v-text-field v-model="editedItem.cronJob" label="Cron Job" required :rules="cronJob"></v-text-field>
                                     </v-col>
 
+                                    <v-col cols="12">
+                                        <v-autocomplete v-model="editedItem.users" :items="userName" dense multiple label="Select User"></v-autocomplete>
+                                    </v-col>
 
-                                     <v-col cols="12">
-                                        <v-autocomplete
-                                            v-model="editedItem.users"
-                                            :items="userName"
-                                            dense
-                                            
-                                            multiple
-                                            label="Select User"
-                                        ></v-autocomplete>
-                                    </v-col>                                  
-
-                                     <v-col cols="12">
-                                        <v-autocomplete
-                                            v-model="editedItem.scripts"
-                                            :items="scriptName"
-                                            dense
-                                            
-                                            label="Script"
-                                        ></v-autocomplete>
+                                    <v-col cols="12">
+                                        <v-autocomplete v-model="editedItem.scripts" :items="scriptName" dense label="Script"></v-autocomplete>
                                     </v-col>
 
                                 </v-row>
@@ -93,14 +79,13 @@
                                         <v-text-field v-model="editedItem.cronJob" label="Cron Job" required :rules="cronJob"></v-text-field>
                                     </v-col>
 
-                                     <v-col cols="12" sm="12">
-                                        <v-select v-model="editedItem.users" :items="userName" label="Users" multiple chips hint="Select User" persistent-hint prepend-icon="account_circle"></v-select>
+                                    <v-col cols="12">
+                                        <v-autocomplete v-model="editedItem.users" :items="userName" dense multiple label="Select User"></v-autocomplete>
                                     </v-col>
 
                                     <v-col cols="12">
-                                        <v-select v-model="scripts" :items="editedItem.scriptName" menu-props="auto" label="Script" hide-details prepend-icon="map" single-line></v-select>
+                                        <v-autocomplete v-model="editedItem.scripts" :items="scriptName" dense label="Script"></v-autocomplete>
                                     </v-col>
-
 
                                 </v-row>
 
@@ -211,8 +196,8 @@ export default {
         tasks: [],
         editedIndex: -1,
         editedItem: {
-            users:'',
-            scripts:'',
+            users: '',
+            scripts: '',
             cronJob: '',
             scheduleName: '',
             createdtime: '',
@@ -222,8 +207,8 @@ export default {
             status: 'Deactive'
         },
         defaultItem: {
-            users:'',
-            scripts:'',
+            users: '',
+            scripts: '',
             cronJob: '',
             scheduleName: '',
             createdtime: '',
@@ -256,12 +241,15 @@ export default {
     methods: {
         initialize() {
             this.tasks = [{
+
                     scheduleName: 'Urgent Tasks',
                     nextRunTime: "2019.01.17",
                     createdtime: "2019.01.17",
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'Routine Tasks',
@@ -270,6 +258,8 @@ export default {
                     lastRunTime: "2016.04.05",
                     lastRunResult: "Succes",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'Lorem Taks',
@@ -278,6 +268,8 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Fail",
                     status: "Suspended",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'Urgent Tasks',
@@ -286,6 +278,9 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
+                    
                 },
                 {
                     scheduleName: 'My2019.01.17',
@@ -294,6 +289,8 @@ export default {
                     lastRunTime: "2015.01.21",
                     lastRunResult: "Succes",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'Jelly PC',
@@ -302,6 +299,8 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Suspended",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'PC Lolli',
@@ -310,6 +309,8 @@ export default {
                     lastRunTime: "2016.04.05",
                     lastRunResult: "Fail",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'HoneyPC',
@@ -318,6 +319,8 @@ export default {
                     lastRunTime: "2019.04.12",
                     lastRunResult: "Fail",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'MAC OS ',
@@ -326,6 +329,8 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
                 {
                     scheduleName: 'Other PC',
@@ -334,6 +339,8 @@ export default {
                     lastRunTime: "2019.02.03",
                     lastRunResult: "Succes",
                     status: "Runing",
+                    users: ['Ahmet', 'Mehmet'],
+                    scripts:'Lorem',
                 },
             ]
         },

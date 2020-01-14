@@ -40,7 +40,7 @@
         <div class="moxielogo">
             <router-link to="/">
                 <v-toolbar-title class="mr-12 align-center">
-                    <span class="title font-weight-light">MOXIE </span>STUDIO
+                    ZOZI <span class="title font-weight-light">STUDIO</span>
                 </v-toolbar-title>
             </router-link>
         </div>

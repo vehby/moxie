@@ -4,6 +4,7 @@
         <v-toolbar flat color="white">
             <div class="d-none d-sm-flex">
             <v-toolbar-title>Agents</v-toolbar-title>
+
             </div>
             <v-spacer></v-spacer>
             <v-row>
@@ -73,6 +74,8 @@
                             </v-container>
                         </v-card-text>
 
+                        
+
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn depressed color="primary" @click="save2">Save</v-btn>
@@ -85,6 +88,7 @@
 
         </v-toolbar>
     </template>
+ 
     <template v-slot:item.action="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)">
             edit
@@ -107,6 +111,7 @@
 <script>
 export default {
     data: () => ({
+        testingCode: "1234",
         search: '',
         dialogNewAgent: false,
         dialogEditAgent: false,
@@ -274,6 +279,7 @@ export default {
                 },
             ]
         },
+
 
         editItem(item) {
             this.editedIndex = this.agents.indexOf(item)
