@@ -2,7 +2,7 @@
 <v-content>
     <v-container class="mt-5" fluid>
         <v-row align="center" justify="center" class="my-4">
-            <v-img src="../assets/zozi-logo-black.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1"  max-width="207" max-height="21" class="mr-2 float-left"></v-img>
+            <v-img src="../assets/zozi-logo-black.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1"  max-width="300" max-height="30" class="mr-2 float-left"></v-img>
         </v-row>
         <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
