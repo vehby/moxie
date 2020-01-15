@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from './views/Dashboard.vue'
+import Layout from './Layout/DefaultLayout.vue'
 import Agent from './views/Agent.vue'
 import Scripts from './views/Scripts.vue'
 import Tasks from './views/Tasks.vue'
@@ -19,52 +20,55 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '',
-      name: 'home',
-      component: Dashboard
+      path: 'layout',
+      name: 'layout',
+      component: Layout,
+      children: [
+        {
+          path : '/dashboard',
+          name : 'dashboard',
+          component : Dashboard
+          },
+        {
+          path : '/agent',
+          name : 'agent',
+          component : Agent
+          },
+          {
+            path: '/scripts',
+            name: 'scripts',
+            component: Scripts
+          },
+          {
+            path: '/tasks',
+            name: 'tasks',
+            component : Tasks
+          },
+          {
+            path : '/trigger',
+            name : 'trigger',
+            component : Trigger
+          },
+          {
+            path : '/logs',
+            name : 'logs',
+            component : Logs
+          },
+          {
+            path : '/usermanager',
+            name : 'usermanager',
+            component : UserManager
+          },
+          {
+            path : '/settings',
+            name : 'settings',
+            component : Settings
+          },
+      ]
     },
+
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard
-    },
-    {
-    path : '/agent',
-    name : 'agent',
-    component : Agent
-    },
-    {
-      path: '/scripts',
-      name: 'scripts',
-      component: Scripts
-    },
-    {
-      path: '/tasks',
-      name: 'tasks',
-      component : Tasks
-    },
-    {
-      path : '/trigger',
-      name : 'trigger',
-      component : Trigger
-    },
-    {
-      path : '/logs',
-      name : 'logs',
-      component : Logs
-    },
-    {
-      path : '/usermanager',
-      name : 'usermanager',
-      component : UserManager
-    },
-    {
-      path : '/settings',
-      name : 'settings',
-      component : Settings
-    },
-    {
-      path : '/login',
+      path : '',
       name : 'login',
       component : Login
     },

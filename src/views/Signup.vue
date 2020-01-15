@@ -1,6 +1,6 @@
 <template>
 <v-content>
-    <v-container class="fill-height" fluid>
+    <v-container class="mt-5" fluid>
         <v-row align="center" justify="center" class="my-4">
             <v-img src="../assets/zozi-logo-black.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1"  max-width="207" max-height="21" class="mr-2 float-left"></v-img>
         </v-row>
@@ -19,7 +19,7 @@
                             <v-text-field label="First Name" v-model="firsName" type="text" required :rules="firstNameRules" outlined/>
                             <v-text-field label="Last Name" v-model="lastName" type="text" required :rules="lastNameRules" outlined/>
                             <v-text-field label="E-Mail" v-model="eMail" type="text" required :rules="emailRules" outlined/>
-                            <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" required :rules="passwordRules" outlined/>
+                            <v-text-field id="password" label="Password" name="password" prepend-inner-icon="lock" type="password" required :rules="passwordRules" outlined/>
                         </v-form>
                         <p class="text-right">
                             <router-link to="/lostpassword"> Forgot password?</router-link>
@@ -31,7 +31,7 @@
                     </v-card-actions>
                     <v-card-actions class="text-center">
                         <div class="text-center">
-                            <p class="text-center">Already have an account? <router-link to="/login"> Log in</router-link>
+                            <p class="text-center">Already have an account? <router-link to="/"> Log in</router-link>
                             </p>
                         </div>
 

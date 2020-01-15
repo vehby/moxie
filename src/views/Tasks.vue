@@ -38,7 +38,7 @@
                                     </v-col>
 
                                     <v-col cols="12">
-                                        <v-autocomplete v-model="editedItem.users" :items="userName" dense multiple label="Select User"></v-autocomplete>
+                                        <v-autocomplete v-model="editedItem.agents" :items="agentName" dense multiple label="Select Agent"></v-autocomplete>
                                     </v-col>
 
                                     <v-col cols="12">
@@ -80,7 +80,7 @@
                                     </v-col>
 
                                     <v-col cols="12">
-                                        <v-autocomplete v-model="editedItem.users" :items="userName" dense multiple label="Select User"></v-autocomplete>
+                                        <v-autocomplete v-model="editedItem.agents" :items="agentName" dense multiple label="Select Agent"></v-autocomplete>
                                     </v-col>
 
                                     <v-col cols="12">
@@ -143,8 +143,8 @@ export default {
             appendIcon: 'event'
         },
 
-        users: [],
-        userName: [
+        agents: [],
+        agentName: [
             'Ahmet', 'Mehmet', 'Ali', 'John', 'Doe', 'Ayşe', 'Meltem'
         ],
         scripts: [],
@@ -196,7 +196,7 @@ export default {
         tasks: [],
         editedIndex: -1,
         editedItem: {
-            users: '',
+            agents: '',
             scripts: '',
             cronJob: '',
             scheduleName: '',
@@ -207,7 +207,7 @@ export default {
             status: 'Deactive'
         },
         defaultItem: {
-            users: '',
+            agents: '',
             scripts: '',
             cronJob: '',
             scheduleName: '',
@@ -248,7 +248,7 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -258,7 +258,7 @@ export default {
                     lastRunTime: "2016.04.05",
                     lastRunResult: "Succes",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -268,7 +268,7 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Fail",
                     status: "Suspended",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -278,7 +278,7 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                     
                 },
@@ -289,7 +289,7 @@ export default {
                     lastRunTime: "2015.01.21",
                     lastRunResult: "Succes",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -299,7 +299,7 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Suspended",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -309,7 +309,7 @@ export default {
                     lastRunTime: "2016.04.05",
                     lastRunResult: "Fail",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -319,7 +319,7 @@ export default {
                     lastRunTime: "2019.04.12",
                     lastRunResult: "Fail",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -329,7 +329,7 @@ export default {
                     lastRunTime: "2019.01.17",
                     lastRunResult: "Succes",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
                 {
@@ -339,7 +339,7 @@ export default {
                     lastRunTime: "2019.02.03",
                     lastRunResult: "Succes",
                     status: "Runing",
-                    users: ['Ahmet', 'Mehmet'],
+                    agents: ['Ahmet', 'Mehmet'],
                     scripts:'Lorem',
                 },
             ]

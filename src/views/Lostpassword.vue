@@ -1,6 +1,6 @@
 <template>
 <v-content>
-    <v-container class="fill-height" fluid>
+    <v-container class="mt-5" fluid>
         <v-row align="center" justify="center" class="my-4">
             <v-img src="../assets/zozi-logo-black.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1"  max-width="207" max-height="21" class="mr-2 float-left"></v-img>
         </v-row>
@@ -15,19 +15,18 @@
                     </v-toolbar>
                     <v-card-text>
                         <v-form class="pa-5">
-
-                            <v-text-field label="E-Mail" v-model="eMail" type="text" required :rules="emailRules" outlined />
+                            <v-text-field label="E-Mail" v-model="eMail" prepend-inner-icon="mail_outline" type="text" required :rules="emailRules" outlined />
                         </v-form>
                         <p>A password reset link will be sent to your email address.</p>
 
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer />
-                        <v-btn color="primary" v-on="on" depressed block>Reset Password</v-btn>
+                        <v-btn color="primary" depressed block>Reset Password</v-btn>
                     </v-card-actions>
                     <v-card-actions class="text-center">
                         <div class="text-center">
-                            <p class="text-center">Back to <router-link to="/login">Login</router-link>
+                            <p class="text-center">Back to <router-link to="/">Login</router-link>
                             </p>
                         </div>
 

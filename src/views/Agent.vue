@@ -37,6 +37,8 @@
                                 <v-row>
                                     <v-col cols="12" sm="12" md="12">
                                         <v-text-field v-model="editedItem.name" autofocus label="Agent Name" required :rules="nameRules"></v-text-field>
+                                         <v-text-field v-model="editedItem.hostKey" autofocus label="Host Key" required :rules="HostKeyRules"></v-text-field>
+                                         <v-text-field v-model="editedItem.agentId" autofocus label="AgentId" disabled></v-text-field>
                                     </v-col>
                                 </v-row>
 
@@ -200,6 +202,8 @@ export default {
             this.agents = [{
                     name: 'MyWindows',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2019.01.17",
                     platform: "Windows",
                     createduser: "Murat Çim",
@@ -208,6 +212,8 @@ export default {
                 {
                     name: 'MyPC',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2019.01.15",
                     platform: "Mac",
                     createduser: "Vehbi Kurtcebe",
@@ -216,6 +222,8 @@ export default {
                 {
                     name: 'HomePC',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2019.01.14",
                     platform: "Windows",
                     createduser: "Lorem Ipsum",
@@ -224,6 +232,8 @@ export default {
                 {
                     name: 'WorkPC',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2019.01.13",
                     platform: "Windows",
                     createduser: "John Doe",
@@ -232,6 +242,8 @@ export default {
                 {
                     name: 'MyWindows',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2019.01.12",
                     platform: "Mac",
                     createduser: "Salamanya Doruk",
@@ -240,6 +252,8 @@ export default {
                 {
                     name: 'Jelly PC',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2019.01.11",
                     platform: "Windows",
                     createduser: "Ahmet Ozbey",
@@ -248,6 +262,8 @@ export default {
                 {
                     name: 'PC Lolli',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2019.02.17",
                     platform: "Mac",
                     createduser: "John Doe",
@@ -256,6 +272,8 @@ export default {
                 {
                     name: 'HoneyPC',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2020.01.17",
                     platform: "Linux",
                     createduser: "John Doe",
@@ -264,6 +282,8 @@ export default {
                 {
                     name: 'MAC OS ',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2017.01.17",
                     platform: "Windows",
                     createduser: "John Doe",
@@ -272,6 +292,8 @@ export default {
                 {
                     name: 'Other PC',
                     key: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    hostKey: "K`^p%8<EsIZWv~X0aI}+q9LABz7yZg",
+                    agentID: "23SDF23",
                     createdtime: "2018.01.17",
                     platform: "Windows",
                     createduser: "John Doe",

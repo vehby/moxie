@@ -1,6 +1,6 @@
 <template>
 <v-content>
-    <v-container class="fill-height" fluid>
+    <v-container fluid mt-5>
         <v-row align="center" justify="center" class="my-4">
             <v-img src="../assets/zozi-logo-black.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1"  max-width="207" max-height="21" class="mr-2 float-left"></v-img>
         </v-row>
@@ -15,9 +15,9 @@
                     </v-toolbar>
                     <v-card-text>
                         <v-form class="pa-5">
-                            <v-text-field label="E-Mail" name="email" prepend-icon="mail" type="text" outlined required :rules="emailRules"/>
+                            <v-text-field label="E-Mail" name="email" prepend-inner-icon="mail" type="text" outlined required :rules="emailRules"/>
 
-                            <v-text-field id="password" label="Password" name="password" prepend-icon="lock" type="password" outlined required :rules="passwordRules"/>
+                            <v-text-field id="password" label="Password" name="password" prepend-inner-icon="lock" type="password" outlined required :rules="passwordRules"/>
                         </v-form>
                         <p class="text-right">
                             <router-link to="/lostpassword"> Forgot password?</router-link>
