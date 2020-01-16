@@ -46,7 +46,7 @@
             </template>
             <v-list>
                 <v-subheader>My Account</v-subheader>
-                <v-list-item @click="method" link>
+                <v-list-item @click="logout" link>
                     <v-list-item-title>Log Out</v-list-item-title>
                 </v-list-item>
 
@@ -66,7 +66,13 @@
 </template>
 
 <script>
+import Auth from '../auth';
 export default {
-    
+    methods:{
+        logout(){
+             Auth.logout();
+             this.$router.push('/');   
+        }    
+    }
 }
 </script>
