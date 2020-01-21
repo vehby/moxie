@@ -71,7 +71,7 @@
 
 <script>
 import Api from '../api';
-
+import Auth from '../auth';
 export default {
     data () {
       return {
@@ -105,7 +105,8 @@ export default {
             if(this.$refs.form.validate()){
                 this.isLoading = true;
                 try{
-                    await Api.signin({Email: this.email, Password: this.password});
+                    let token = await Api.signin({Email: this.email, Password: this.password});
+                    Auth.setToken(token);
                     this.$router.push('dashboard');
                 }catch(e){
                     this.errorMessage = e.response.data.reason;

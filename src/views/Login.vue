@@ -13,7 +13,7 @@
                         <v-spacer />
 
                     </v-toolbar>
-                                        <v-progress-linear
+                    <v-progress-linear
                         v-show="isLoading"
                         indeterminate
                         color="yellow darken-2"
@@ -74,6 +74,9 @@ export default {
     },
     methods:{
         async login(){
+            
+            if(!this.$refs.form.validate()){ return; }
+
             this.isLoading = true;
             try{
                 await Api.login({Email:this.email , Password: this.password}); 
