@@ -8,7 +8,10 @@ class Api{
             baseURL: 'http://localhost:3000',
             transformRequest: [function (data, headers) {
                 headers['auth-password-token'] = Auth.getToken();
-                return JSON.stringify(data)
+                if(headers['Content-Type']== 'application/json'){
+                    return JSON.stringify(data)
+                }
+                return data;
             }],
             headers: {
                 'Content-Type':'application/json'
@@ -49,6 +52,26 @@ class Api{
 
     async listAgents(){
         let {data} = await this.sender.get('/agent');
+        return data;
+    }
+
+    /**
+     * 
+     * @param {FormData} formData 
+     */
+    async createScript(formData){
+        let {data} = await this.sender({
+            method:'POST',
+            url:'/script/create',
+            data:formData,      
+            headers:{'Content-Type': 'multipart/form-data' }
+        });
+
+        return data;
+    }
+
+    async listScripts(){
+        let {data} = await this.sender.get('/script');
         return data;
     }
 
