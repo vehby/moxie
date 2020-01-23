@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import agent from './modules/agent'
 import script from './modules/script';
+import task from './modules/task';
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -10,7 +11,8 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   modules: {
     agent,
-    script
+    script,
+    task
   },
   strict: debug,
 })

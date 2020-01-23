@@ -75,6 +75,16 @@ class Api{
         return data;
     }
 
+    async listTasks(){
+        let {data} = await this.sender.get('/task');
+        return data;
+    }
+
+    async createTask(task){
+        let {data} = await this.sender.post('/task/create', task );
+        return data;
+    }
+
 }
 
 export default new Api();
