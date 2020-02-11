@@ -1,4 +1,4 @@
-# Moxie Studio
+# Vue.JS - Task Managment Dashboard
 
 ## Project setup
 ```
