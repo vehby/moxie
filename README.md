@@ -8,7 +8,7 @@
 <img src="https://i.ibb.co/BGqFDzZ/logs.png" alt="logs" border="0">
 <img src="https://i.ibb.co/TvYv8XH/login.png" alt="login" border="0">
 <img src="https://i.ibb.co/N28vnLF/lost-pass.png" alt="lost-pass" border="0">
-<img src="https://i.ibb.co/FKHsd2W/Screen-Shot-2020-02-11-at-12-29-46.png"></img>
+
 
 ## Project setup
 ```
