@@ -6,11 +6,12 @@ import App from './App.vue'
 import router from './router'
 
 // Plugins
-import VueGoogleCharts from './plugins/vue-google-charts'
+import VueGoogleCharts from 'vue-google-charts'
 import vuetify from './plugins/vuetify';
 
 
 Vue.config.productionTip = false
+Vue.use(VueGoogleCharts)
 
 new Vue({
   router,
