@@ -1,9 +1,11 @@
 <template>
-    <div>
-            <v-app-bar app clipped-left color="primary" dense class="white--text shadow-md" height="65">
-        <v-app-bar-nav-icon dark @click.stop="drawer = !drawer" />
-       <router-link to="/"> <v-img src="../assets/moxie-logo.png" lazy-src="../assets/moxie-logo.png" aspect-ratio="1" max-width="207" max-height="20" class="mr-2"></v-img></router-link>
-   
+<div>
+    <v-app-bar app clipped-left color="primary" dense class="white--text shadow-md" height="65">
+        <v-app-bar-nav-icon dark @click="drawer = !drawer" />
+        <router-link to="/">
+            <v-img src="../assets/zozi-logo.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1" max-width="207" max-height="21" class="mr-2"></v-img>
+        </router-link>
+
         <v-spacer />
 
         <v-menu>
@@ -20,7 +22,7 @@
                 <v-list>
 
                     <v-subheader>Notification</v-subheader>
-                    <v-list-item @click="method">
+                    <v-list-item>
                         <v-list-item-title>
                             <p>Task One is failled</p>
                         </v-list-item-title>
@@ -46,7 +48,7 @@
             </template>
             <v-list>
                 <v-subheader>My Account</v-subheader>
-                <v-list-item @click="logout" link>
+                <v-list-item link>
                     <v-list-item-title>Log Out</v-list-item-title>
                 </v-list-item>
 
@@ -62,17 +64,11 @@
         </v-menu>
 
     </v-app-bar>
-    </div>
+</div>
 </template>
 
 <script>
-import Auth from '../auth';
 export default {
-    methods:{
-        logout(){
-             Auth.logout();
-             this.$router.push('/');   
-        }    
-    }
+
 }
 </script>

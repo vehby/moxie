@@ -2,7 +2,7 @@
 <v-content>
     <v-container fluid mt-5>
         <v-row align="center" justify="center" class="my-4">
-            <v-img src="../assets/moxie-logo-black.png" lazy-src="../assets/moxie-logo.png" aspect-ratio="1"  max-width="320" max-height="27" class="mr-2 float-left"></v-img>
+            <v-img src="../assets/zozi-logo-black.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1"  max-width="300" max-height="30" class="mr-2 float-left"></v-img>
         </v-row>
         <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
@@ -13,25 +13,11 @@
                         <v-spacer />
 
                     </v-toolbar>
-                    <v-progress-linear
-                        v-show="isLoading"
-                        indeterminate
-                        color="yellow darken-2"
-                    ></v-progress-linear>
-                    <v-alert
-                        v-show="!!errorMessage"
-                        text
-                        prominent
-                        type="error"
-                        icon="mdi-alert-circle"
-                    >
-                        {{errorMessage}}
-                    </v-alert>
                     <v-card-text>
-                        <v-form ref="form" class="pa-5">
-                            <v-text-field label="E-Mail" v-model="email" name="email" prepend-inner-icon="mail" type="text" outlined required :rules="emailRules"/>
+                        <v-form class="pa-5">
+                            <v-text-field label="E-Mail" name="email" prepend-inner-icon="mail" type="text" outlined required :rules="emailRules"/>
 
-                            <v-text-field id="password" v-model="password" label="Password" name="password" prepend-inner-icon="lock" type="password" outlined required :rules="passwordRules"/>
+                            <v-text-field id="password" label="Password" name="password" prepend-inner-icon="lock" type="password" outlined required :rules="passwordRules"/>
                         </v-form>
                         <p class="text-right">
                             <router-link to="/lostpassword"> Forgot password?</router-link>
@@ -39,7 +25,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer />
-                        <v-btn color="primary" v-on="on" v-on:click="login" depressed block>Login</v-btn>
+                        <v-btn color="primary" v-on="on" depressed block>Login</v-btn>
                     </v-card-actions>
                     <v-card-actions class="text-center">
                         <div class="text-center">
@@ -56,8 +42,6 @@
 </template>
 
 <script>
-import Api from '../api';
-
 export default {
      data() {
         return {
@@ -67,26 +51,10 @@ export default {
             ],
             passwordRules: [
                 v => !!v || 'Password is required',
-            ],
-            errorMessage:"",
-            isLoading: false
+            ]
         }
     },
-    methods:{
-        async login(){
-            
-            if(!this.$refs.form.validate()){ return; }
-
-            this.isLoading = true;
-            try{
-                await Api.login({Email:this.email , Password: this.password}); 
-                this.$router.push('dashboard');   
-            }catch(e){
-                this.errorMessage = e.response.data.reason,
-                this.isLoading =  false;
-            }
-        }
-    },
+    
     
     props: {
         source: String,

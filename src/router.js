@@ -12,7 +12,7 @@ import Settings from './views/Settings'
 import Login from './views/Login'
 import SignUp from './views/Signup'
 import Lostpassword from './views/Lostpassword'
-import { redirectIfNotAuthenticated, redirectIfAuthenticated} from './middlewares/token';
+
 Vue.use(Router)
 
 export default new Router({
@@ -23,14 +23,12 @@ export default new Router({
       path: 'layout',
       name: 'layout',
       component: Layout,
-      beforeEnter: redirectIfNotAuthenticated ,
       children: [
         {
           path : '/dashboard',
           name : 'dashboard',
-          component : Dashboard,
-          
-        },
+          component : Dashboard
+          },
         {
           path : '/agent',
           name : 'agent',
@@ -70,22 +68,19 @@ export default new Router({
     },
 
     {
-      path : '/',
+      path : '',
       name : 'login',
-      component : Login,
-      beforeEnter: redirectIfAuthenticated ,
+      component : Login
     },
     {
       path : '/signup',
       name : 'singup',
-      component : SignUp,
-      beforeEnter: redirectIfAuthenticated ,
+      component : SignUp
     },
     {
-      path : '/lostpassword',
-      name : 'lostpassword',
-      component : Lostpassword,
-      beforeEnter: redirectIfNotAuthenticated ,
+    path : '/lostpassword',
+    name : 'lostpassword',
+    component : Lostpassword
     }
   ]
 })

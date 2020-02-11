@@ -1,22 +1,9 @@
 <template>
-<div>
-<v-skeleton-loader
-        v-if="isLoading"
-        ref="skeleton"
-        type="table"
-        class="mx-auto"
-      ></v-skeleton-loader>
-<v-data-table :headers="headers" :items="tasks" class="shadow-xl mx-5 my-5" :search="search" v-else>
+<v-data-table :headers="headers" :items="tasks" class="shadow-xl mx-5 my-5" :search="search">
     <template v-slot:top>
         <v-toolbar flat color="white">
             <div class="d-none d-sm-flex">
-                <v-toolbar-title>Tasks
-                    <v-progress-circular
-                    v-show="isRefreshing"
-                    indeterminate
-                    color="primary"
-                ></v-progress-circular> 
-                </v-toolbar-title>
+                <v-toolbar-title>Tasks</v-toolbar-title>
             </div>
             <v-spacer></v-spacer>
             <v-row>
@@ -25,12 +12,15 @@
                     </v-text-field>
                 </v-col>
             </v-row>
-            
-            <new-task-dialog />
-            <v-dialog v-model="dialog_edit_task" max-width="500px">
-
+            <v-dialog v-model="dialog_new_task" max-width="500px">
+                <template v-slot:activator="{ on }">
+                    <v-btn color="primary" depressed v-on="on">
+                        <v-icon left>add</v-icon>
+                        New Task
+                    </v-btn>
+                </template>
                 <v-card>
-                    <v-form ref="form">
+                    <v-form ref="form" v-model="valid">
                         <v-card-title>
                             <span class="headline">{{ formTitle }}</span>
                         </v-card-title>
@@ -44,7 +34,51 @@
                                         <v-text-field v-model="editedItem.scheduleName" label="Schedule Name" required :rules="nameRules"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="12">
-                                        <v-text-field v-model="editedItem.cronJob" label="Cron Job" required ></v-text-field>
+                                        <v-text-field v-model="editedItem.cronJob" label="Cron Job" required :rules="cronJob"></v-text-field>
+                                    </v-col>
+
+                                    <v-col cols="12">
+                                        <v-autocomplete v-model="editedItem.agents" :items="agentName" dense multiple label="Select Agent"></v-autocomplete>
+                                    </v-col>
+
+                                    <v-col cols="12">
+                                        <v-autocomplete v-model="editedItem.scripts" :items="scriptName" dense label="Script"></v-autocomplete>
+                                    </v-col>
+
+                                </v-row>
+
+                            </v-container>
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn depressed color="primary" @click="save">Save</v-btn>
+                            <v-btn color="grey darken-1" text @click="close">Cancel</v-btn>
+                        </v-card-actions>
+                    </v-form>
+                </v-card>
+            </v-dialog>
+
+          
+
+            <v-dialog v-model="dialog_edit_task" max-width="500px">
+
+                <v-card>
+                    <v-form ref="form" v-model="valid">
+                        <v-card-title>
+                            <span class="headline">{{ formTitle }}</span>
+                        </v-card-title>
+
+                        <v-card-text>
+                            <v-container>
+
+                                <v-row>
+
+                                    <v-col cols="12" sm="6" md="12">
+                                        <v-text-field v-model="editedItem.scheduleName" label="Schedule Name" required :rules="nameRules"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="6" md="12">
+                                        <v-text-field v-model="editedItem.cronJob" label="Cron Job" required :rules="cronJob"></v-text-field>
                                     </v-col>
 
                                     <v-col cols="12">
@@ -86,39 +120,35 @@
     </template>
 
     <template v-slot:no-data>
-        
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
     </template>
 
     <template v-slot:item.lastRunResult="{ item }">
-        <v-icon :class="item.lastRunResult" small left>check</v-icon>
-        <v-p :class="item.lastRunResult" dark>{{ item.lastRunResult }}</v-p>
+        
+        <p :class="item.lastRunResult" dark><v-icon :class="item.lastRunResult" small left>check</v-icon>{{ item.lastRunResult }}</p>
     </template>
 
     <template v-slot:item.status="{ item }">
-        <v-chip :color="item.status" dark>{{ item.status }}</v-chip>
+        <LogDetails />
     </template>
 
 </v-data-table>
-</div>
 </template>
 
 <script>
-import {mapActions , mapState} from 'vuex'
-import { FETCH_TASKS} from '../store/modules/task'
-import NewTaskDialog from './NewTaskDialog'
+import LogDetails from "./LogDetails.vue";
+
 export default {
-
     components: {
-        'new-task-dialog': NewTaskDialog
+        LogDetails
     },
-
     data: () => ({
         date: new Date().toISOString().substr(0, 10),
         search: '',
         textFieldProps: {
             appendIcon: 'event'
         },
-
+        cronJob:'',
         agents: [],
         agentName: [
             'Ahmet', 'Mehmet', 'Ali', 'John', 'Doe', 'Ayşe', 'Meltem'
@@ -138,14 +168,14 @@ export default {
         menu: false,
         modal: false,
         headers: [{
-                text: 'Task Name',
+                text: 'Schedule Name',
                 align: 'left',
                 sortable: true,
-                value: 'Name'
+                value: 'scheduleName'
             },
             {
                 text: 'Created Time',
-                value: 'createdAt'
+                value: 'createdtime'
             },
             {
                 text: 'Next Run Time',
@@ -169,7 +199,7 @@ export default {
                 sortable: false
             },
         ],
-        
+        tasks: [],
         editedIndex: -1,
         editedItem: {
             agents: '',
@@ -199,11 +229,6 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? 'New Task' : 'Edit Task'
         },
-        ...mapState('task',{
-            tasks: (state) => state.tasks,
-            isLoading: (state) => state.isLoading,
-            isRefreshing: (state) => state.isRefreshing
-        })
     },
 
     watch: {
@@ -216,14 +241,126 @@ export default {
     },
 
     created() {
-        this.fetchTasks(false);
+        this.initialize()
     },
 
     methods: {
-        
-        ...mapActions('task' , {
-            fetchTasks: FETCH_TASKS
-        }),
+        initialize() {
+            this.tasks = [{
+
+                    scheduleName: 'Urgent Tasks',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2019.01.17",
+                    lastRunTime: "2019.01.17",
+                    lastRunResult: "Succes",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+                {
+                    scheduleName: 'Routine Tasks',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2019.01.15",
+                    lastRunTime: "2016.04.05",
+                    lastRunResult: "Succes",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                    
+                },
+                {
+                    scheduleName: 'Lorem Taks',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2019.01.14",
+                    lastRunTime: "2019.01.17",
+                    lastRunResult: "Fail",
+                    status: "Suspended",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+                {
+                    scheduleName: 'Urgent Tasks',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2019.01.13",
+                    lastRunTime: "2019.01.17",
+                    lastRunResult: "Succes",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+
+                },
+                {
+                    scheduleName: 'My2019.01.17',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2019.01.12",
+                    lastRunTime: "2015.01.21",
+                    lastRunResult: "Succes",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+                {
+                    scheduleName: 'Jelly PC',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2019.01.11",
+                    lastRunTime: "2019.01.17",
+                    lastRunResult: "Succes",
+                    status: "Suspended",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+                {
+                    scheduleName: 'PC Lolli',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2019.02.17",
+                    lastRunTime: "2016.04.05",
+                    lastRunResult: "Fail",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+                {
+                    scheduleName: 'HoneyPC',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2020.01.17",
+                    lastRunTime: "2019.04.12",
+                    lastRunResult: "Fail",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+                {
+                    scheduleName: 'MAC OS ',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2017.01.17",
+                    lastRunTime: "2019.01.17",
+                    lastRunResult: "Succes",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+                {
+                    scheduleName: 'Other PC',
+                    nextRunTime: "2019.01.17",
+                    createdtime: "2018.01.17",
+                    lastRunTime: "2019.02.03",
+                    lastRunResult: "Succes",
+                    status: "Runing",
+                    agents: ['Ahmet', 'Mehmet'],
+                    scripts: 'Lorem',
+                    cronJob:''
+                },
+            ]
+        },
 
         editItem(item) {
             this.editedIndex = this.tasks.indexOf(item)
@@ -236,7 +373,23 @@ export default {
             confirm('Are you sure you want to delete this Task?') && this.tasks.splice(index, 1)
         },
 
-        
+        close() {
+            this.dialog_new_task = false
+            setTimeout(() => {
+                this.editedItem = Object.assign({}, this.defaultItem)
+                this.editedIndex = -1
+            }, 300)
+        },
+
+        save() {
+            if (this.editedIndex > -1) {
+                Object.assign(this.tasks[this.editedIndex], this.editedItem)
+            } else {
+                this.tasks.push(this.editedItem)
+            }
+            this.close()
+        },
+
         close2() {
             this.dialog_edit_task = false
             setTimeout(() => {

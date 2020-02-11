@@ -1,4 +1,4 @@
-# Zozi Task Management
+# Moxie Studio
 
 ## Project setup
 ```
