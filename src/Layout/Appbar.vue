@@ -3,7 +3,7 @@
     <v-app-bar app clipped-left color="primary" dense class="white--text shadow-md" height="65">
         <v-app-bar-nav-icon dark @click="drawer = !drawer" />
         <router-link to="/">
-            <v-img src="../assets/zozi-logo.png" lazy-src="../assets/zozi-logo.png" aspect-ratio="1" max-width="207" max-height="21" class="mr-2"></v-img>
+            <v-img src="../assets/zozi-logo.png" lazy-src="../assets/zozi-logo.png" max-width="207" max-height="21" class="mr-2"></v-img>
         </router-link>
 
         <v-spacer />
