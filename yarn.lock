@@ -1239,9 +1239,9 @@ acorn-walk@^6.1.1:
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
 
 acorn@^6.0.2, acorn@^6.0.7, acorn@^6.1.1, acorn@^6.2.1:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.0.tgz#b659d2ffbafa24baf5db1cdbb2c94a983ecd2784"
-  integrity sha512-gac8OEcQ2Li1dxIEWGZzsp2BitJxwkwcOm0zHAJLcPJaVvm58FRnk6RkuLRpU1EujipU2ZFODv2P9DLMfnV8mw==
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
+  integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
 
 address@^1.1.2:
   version "1.1.2"
@@ -2634,10 +2634,20 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+date-fns@^2.1.0:
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.11.1.tgz#197b8be1bbf5c5e6fe8bea817f0fe111820e7a12"
+  integrity sha512-3RdUoinZ43URd2MJcquzBbDQo+J87cSzB8NkXdZiN5ia1UNyep0oCyitfiL88+R7clGTeq/RniXAc16gWyAu1w==
+
 de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
+
+debounce@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  integrity sha512-mYtLl1xfZLi1m4RtQYlZgJUNQjl4ZxVnHzIR8nLLgi4q1YT8o/WM+MK/f8yfcc9s5Ir5zRaPZyZU6xs1Syoocg==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
@@ -7883,6 +7893,13 @@ vue-eslint-parser@^5.0.0:
     esquery "^1.0.1"
     lodash "^4.17.11"
 
+vue-google-charts@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/vue-google-charts/-/vue-google-charts-0.3.2.tgz#fd78c9487c25327da27e0613d78c9d9724ac4c21"
+  integrity sha512-pyNLJvjY1ZTAI91ppqGth9YaA7TA7wuotn33f7PIYkwJ4jmUbm2ZBSEkc2QaGKv8jLHkTg+gYDOmvWDTc9pAvQ==
+  dependencies:
+    debounce "^1.1.0"
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
@@ -7898,6 +7915,11 @@ vue-loader@^15.7.2:
     loader-utils "^1.1.0"
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
+
+vue-router@^3.1.3:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.1.6.tgz#45f5a3a3843e31702c061dd829393554e4328f89"
+  integrity sha512-GYhn2ynaZlysZMkFE5oCHRUTqE8BWs/a9YbKpNLi0i7xD6KG1EzDqpHQmv1F5gXjr8kL5iIVS8EOtRaVUEXTqA==
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
@@ -7925,6 +7947,15 @@ vue@^2.6.10:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
+vuetify-datetime-picker@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/vuetify-datetime-picker/-/vuetify-datetime-picker-2.1.1.tgz#582341b65fa6e8036cb10d7e56a90d9989335ad9"
+  integrity sha512-xY3YCVNxoe/5Chbm7G2BXrkg12CWLWwnDJZdhNPVKe1p8S72H8NomYOB6SSBzMMEHisRGIRzAQTDwDfDU06x/Q==
+  dependencies:
+    date-fns "^2.1.0"
+    vue "^2.6.10"
+    vuetify "^2.1.3"
+
 vuetify-loader@^1.3.0, vuetify-loader@^1.4.3:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.4.3.tgz#df1323c558be09890877e5fbe817b3a71a6c538d"
@@ -7936,6 +7967,11 @@ vuetify@^2.1.13, vuetify@^2.1.15:
   version "2.1.15"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.1.15.tgz#26386557c63ad700e6e8d8a330f8d2831fbef6ef"
   integrity sha512-M35NJvlzkbCpFfsK08xraNvCpiNCIbYUXI/hkzjWHQV1MFIZnjrDTVtYoiudCyJ52zlrhWezAr4pzFOCLAr6RA==
+
+vuetify@^2.1.3:
+  version "2.2.20"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.20.tgz#8cb042f7274f39130f8d40d85d23d62d1c33cae4"
+  integrity sha512-tiij3ammBiG7QrdwRBJxW917AyDLcMekRtLosdyVshDKHA5CpKrru8Ljn1gAmeUyhYZyUw4gz3XbrrIJ++TP7w==
 
 watchpack@^1.6.0:
   version "1.6.0"
